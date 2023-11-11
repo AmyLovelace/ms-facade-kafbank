@@ -41,7 +41,7 @@ public class CardJDBCAdapter implements CardJDBCRepository {
                 .addValue(KEY_DESCRIPTION,card.getDescriptionStatus())
                 .addValue(KEY_MEMBERSHIP,card.getMembership())
                 .addValue(KEY_BALANCE, card.getBalance());
-        
+
         log.info("Exito al insertar una nueva tarjeta a la BD [{}]", card);
 
         return dao.insert(createCard,params,null).intValue();
