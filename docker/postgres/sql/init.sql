@@ -1,3 +1,12 @@
+CREATE OR REPLACE FUNCTION create_card()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO card (account_id, card_number, membership, description_status, balance)
+  VALUES (NEW.id, generate_random_card_number(), 'Standard', 'Activo', 0);
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
 CREATE TABLE IF NOT EXISTS account (
   id SERIAL PRIMARY KEY,
@@ -20,13 +29,3 @@ CREATE TRIGGER account_insert_card
 AFTER INSERT ON account
 FOR EACH ROW
 EXECUTE PROCEDURE create_card();
-
-CREATE OR REPLACE FUNCTION create_card()
-RETURNS TRIGGER AS $$
-BEGIN
-  INSERT INTO card (account_id, card_number, membership, description_status, balance)
-  VALUES (NEW.id, generate_random_card_number(), 'Standard', 'Activo', 0);
-
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
