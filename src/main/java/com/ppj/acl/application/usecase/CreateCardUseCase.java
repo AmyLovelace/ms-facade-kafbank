@@ -1,41 +1,41 @@
 package com.ppj.acl.application.usecase;
 
+import com.ppj.acl.adapter.rest.model.card.CardBuilder;
 import com.ppj.acl.application.port.out.CardJDBCRepository;
 import com.ppj.acl.application.port.out.CreateCard;
 import com.ppj.acl.config.ErrorCodeAccount;
 import com.ppj.acl.config.exception.CustomHttpMessageNotReadableException;
-import com.ppj.acl.domain.Card;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
 @Slf4j
 public class CreateCardUseCase implements CreateCard {
 
-    private final String DEFAULT_DESCRIPTION_STATUS = "Active";
-    private final String DEFAULT_MEMBERSHIP = "Standard";
-
-
+    private final CardBuilder cardBuilder;
     private final CardJDBCRepository cardJDBCRepository;
 
+    public CreateCardUseCase(CardBuilder cardBuilder, CardJDBCRepository cardJDBCRepository) {
+        this.cardBuilder = cardBuilder;
+        this.cardJDBCRepository = cardJDBCRepository;
+    }
+
     @Override
-    public void create(Card card) {
+    public void create() {
         try{
-            Card create = new Card(card.getCardNumber(),card.getDescriptionStatus(),card.getMembership(),card.getBalance());
+            cardBuilder.getCardNumber();
+            cardBuilder.getDescriptionStatus();
+            cardBuilder.getMembership();
+            cardBuilder.getBalance();
+
+
             cardJDBCRepository.CardCreate(card);
         }catch(CustomHttpMessageNotReadableException e){
             log.error("Error al generar el mensaje en CreateCardUseCase: ", e);
             throw new CustomHttpMessageNotReadableException(ErrorCodeAccount.INVALID_CARD_MESSAGE_REQUEST);
         }
 
-
     }
-
-
-
-
 
 
 

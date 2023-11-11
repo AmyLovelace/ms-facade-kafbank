@@ -3,10 +3,12 @@ package com.ppj.acl.domain;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
+import lombok.Setter;
 import lombok.Value;
 
 @Value
 @Builder
+@Setter
 public class Card {
     String cardNumber;
     String descriptionStatus;
