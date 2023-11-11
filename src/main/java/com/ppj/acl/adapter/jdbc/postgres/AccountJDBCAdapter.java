@@ -20,7 +20,7 @@ public class AccountJDBCAdapter implements AccountJDBCRepository {
 
     private static final String KEY_ACCOUNT_N = "accountnumber";
     private static final String KEY_AGE= "age";
- 
+
 
      private final GenericDAO dao;
 

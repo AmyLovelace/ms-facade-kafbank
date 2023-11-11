@@ -1,7 +1,7 @@
 package com.ppj.acl.adapter.jdbc.postgres;
 
 import com.ppj.acl.adapter.jdbc.dao.sql.GenericDAO;
-import com.ppj.acl.adapter.rest.model.card.CardBuilder;
+import com.ppj.acl.adapter.jdbc.dao.sql.SqlReader;
 import com.ppj.acl.application.port.out.CardJDBCRepository;
 import com.ppj.acl.domain.Card;
 import lombok.extern.slf4j.Slf4j;
@@ -27,10 +27,13 @@ public class CardJDBCAdapter implements CardJDBCRepository {
     private final String createCard;
     private final String insertCard;
 
-    public CardJDBCAdapter(GenericDAO dao, String createCard, String insertCard) {
+    public CardJDBCAdapter(final GenericDAO dao) {
+
         this.dao = dao;
-        this.createCard = createCard;
-        this.insertCard = insertCard;
+        this.createCard = SqlReader.read(SQL_CREATE_CARD);
+
+        this.insertCard = SqlReader.read(SQL_INSERT_ACCOUNT);
+
     }
 
     @Override
