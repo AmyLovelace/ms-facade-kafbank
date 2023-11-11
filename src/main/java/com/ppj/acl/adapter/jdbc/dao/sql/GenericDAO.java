@@ -27,6 +27,11 @@ public class GenericDAO {
         this.template = template;
     }
 
+    public int update(String sql, MapSqlParameterSource params) {
+        log.info(SQL_MESSAGE, sql, params);
+        return template.update(sql, params);
+    }
+
     public <T> Optional<T> findOne(String sql, Object params, Class<T> tClass) {
         return doFind(sql, params, tClass).stream().findFirst();
     }
@@ -64,6 +69,7 @@ public class GenericDAO {
         return template.query(sql, params, new
                 BeanPropertyRowMapper<>(tClass));
     }
+
 
     public Number insert(String sql, MapSqlParameterSource params, String[] keys) {
         log.info(SQL_MESSAGE, sql, params);

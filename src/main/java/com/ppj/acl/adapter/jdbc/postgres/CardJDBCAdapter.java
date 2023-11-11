@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class CardJDBCAdapter implements CardJDBCRepository {
 
-    private static final String SQL_CREATE_CARD = "sql/create-card";
+    private static final String SQL_CREATE_CARD = "sql/create-card.sql";
 
     private static final String SQL_INSERT_ACCOUNT = "sql/insert-card.sql";
 
@@ -37,19 +37,16 @@ public class CardJDBCAdapter implements CardJDBCRepository {
     }
 
     @Override
-    public Integer CardCreate(Card card) {
+    public Integer cardCreate(Card card) {
         log.info("Insertando una nueva tarjeta a la BD [{}]", card);
-        var params = new MapSqlParameterSource()
-                .addValue(KEY_CARD_NUM, card.getCardNumber())
-                .addValue(KEY_DESCRIPTION,card.getDescriptionStatus())
-                .addValue(KEY_MEMBERSHIP,card.getMembership())
-                .addValue(KEY_BALANCE, card.getBalance());
 
-        log.info("Exito al insertar una nueva tarjeta a la BD [{}]", card);
+        var params = new MapSqlParameterSource();
+        params.addValue("cardnumber", card.getCardNumber());
+        params.addValue("descriptionstatus", card.getDescriptionStatus());
+        params.addValue("membership", card.getMembership());
+        params.addValue("balance", card.getBalance());
 
-        return dao.insert(createCard,params,null).intValue();
-
-
-
+        return dao.update(createCard, params);
     }
+
 }
