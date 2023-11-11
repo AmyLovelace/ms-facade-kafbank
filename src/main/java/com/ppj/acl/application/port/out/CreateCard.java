@@ -4,5 +4,5 @@ import com.ppj.acl.domain.Card;
 
 public interface CreateCard {
 
-    String create();
+    void create();
 }
