@@ -23,15 +23,14 @@ public class CreateCardUseCase implements CreateCard {
 
     @Override
     public String create() {
-        Card card;
         try {
-            card = cardBuilder.toDomain();
-            cardJDBCRepository.CardCreate(card);
+            cardJDBCRepository.CardCreate(cardBuilder.toDomain());
+            return "CreateCardUseCaseSuccess";
         } catch (CustomHttpMessageNotReadableException e) {
             log.error("Error al generar el mensaje en CreateCardUseCase: ", e);
             throw new CustomHttpMessageNotReadableException(ErrorCodeAccount.INVALID_CARD_MESSAGE_REQUEST);
         }
-        return "CreateCardUseCase" + card;
+
 
     }
 
