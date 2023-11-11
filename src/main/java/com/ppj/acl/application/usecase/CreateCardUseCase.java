@@ -14,14 +14,26 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class CreateCardUseCase implements CreateCard {
 
+    private final String DEFAULT_DESCRIPTION_STATUS = "Active";
+    private final String DEFAULT_MEMBERSHIP = "Standard";
+
 
     private final CardJDBCRepository cardJDBCRepository;
 
     @Override
     public void create(Card card) {
-        //HACER LOGICA AGREGAR CAMPOS
+        try{
+            Card create = new Card(card.getCardNumber(),card.getDescriptionStatus(),card.getMembership(),card.getBalance());
+            cardJDBCRepository.CardCreate(card);
+        }catch(CustomHttpMessageNotReadableException e){
+            log.error("Error al generar el mensaje en CreateCardUseCase: ", e);
+            throw new CustomHttpMessageNotReadableException(ErrorCodeAccount.INVALID_CARD_MESSAGE_REQUEST);
+        }
+
 
     }
+
+
 
 
 

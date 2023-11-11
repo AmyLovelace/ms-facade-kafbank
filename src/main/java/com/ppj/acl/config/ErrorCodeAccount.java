@@ -8,6 +8,7 @@ import lombok.Getter;
 public enum ErrorCodeAccount {
     INTERNAL_ERROR(100, "Error interno del servidor"),
     CARD_INVALID_REQUEST(102,  "datos invalidos o con formato no aplicable "),
+    INVALID_CARD_MESSAGE_REQUEST(102,  "erro al crear la tarjeta"),
     WEB_CLIENT_GENERIC(101, "Error del Web client"),
     ACCOUNT_NOT_FOUND(102, "No se encontro la cuenta"),
     ACCOUNT_BAD_REQUEST(103, "El llamado a la cuenta retorno una peticion invalida"),
