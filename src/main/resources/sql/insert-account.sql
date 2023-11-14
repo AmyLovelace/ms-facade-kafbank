@@ -1,1 +1,1 @@
-INSERT INTO card(accountnumber,age) VALUES (:accountnumber,:age)
+INSERT INTO account(accountnumber,age) VALUES (:accountnumber,:age)

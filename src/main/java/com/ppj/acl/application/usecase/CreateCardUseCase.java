@@ -5,6 +5,7 @@ import com.ppj.acl.application.port.out.CardJDBCRepository;
 import com.ppj.acl.application.port.out.CreateCard;
 import com.ppj.acl.config.ErrorCodeAccount;
 import com.ppj.acl.config.exception.CustomHttpMessageNotReadableException;
+import com.ppj.acl.domain.Card;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -21,9 +22,11 @@ public class CreateCardUseCase implements CreateCard {
     }
 
     @Override
-    public void create() {
+    public void create(Card card) {
+
         try {
-            cardJDBCRepository.cardCreate(cardBuilder.toDomain());
+            log.info("entrando al create cardusecase");
+            cardJDBCRepository.cardCreate(card);
         } catch (CustomHttpMessageNotReadableException e) {
             log.error("Error al generar el mensaje en CreateCardUseCase: ", e);
             throw new CustomHttpMessageNotReadableException(ErrorCodeAccount.INVALID_CARD_MESSAGE_REQUEST);
@@ -31,4 +34,6 @@ public class CreateCardUseCase implements CreateCard {
 
 
     }
+
+
 }

@@ -1,8 +1,9 @@
 CREATE OR REPLACE FUNCTION create_card()
 RETURNS TRIGGER AS $$
 BEGIN
-  INSERT INTO card (account_id, card_number, membership, description_status, balance)
-  VALUES (NEW.id, generate_random_card_number(), 'Standard', 'Activo', 0);
+  INSERT INTO card (account_id, cardnumber, membership, descriptionstatus, balance)
+  VALUES ('${account_id}', '${cardnumber}', '${membership}', '${descriptionstatus}',
+  '${balance}');
 
   RETURN NEW;
 END;
@@ -11,8 +12,8 @@ $$ LANGUAGE plpgsql;
 CREATE TABLE IF NOT EXISTS card (
   id SERIAL PRIMARY KEY,
   account_id INT NOT NULL,
-  card_number VARCHAR(255) NOT NULL UNIQUE,
+  cardnumber VARCHAR(255) NOT NULL UNIQUE,
   membership VARCHAR(255) NOT NULL,
-  description_status VARCHAR(255) NOT NULL,
+  descriptionstatus VARCHAR(255) NOT NULL,
   balance INT NOT NULL
 );

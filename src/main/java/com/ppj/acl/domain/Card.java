@@ -2,6 +2,7 @@ package com.ppj.acl.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Setter;
 import lombok.Value;
@@ -25,4 +26,6 @@ public class Card {
         this.membership = membership;
         this.balance = balance;
     }
+
+
 }

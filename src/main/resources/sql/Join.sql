@@ -1,0 +1,1 @@
+Select * from account inner join public.card c on account.id = c.id

@@ -2,6 +2,7 @@ package com.ppj.acl.adapter.jdbc.postgres;
 
 import com.ppj.acl.adapter.jdbc.dao.sql.GenericDAO;
 import com.ppj.acl.adapter.jdbc.dao.sql.SqlReader;
+import com.ppj.acl.adapter.rest.model.card.CardBuilder;
 import com.ppj.acl.application.port.out.CardJDBCRepository;
 import com.ppj.acl.domain.Card;
 import lombok.extern.slf4j.Slf4j;
@@ -41,12 +42,14 @@ public class CardJDBCAdapter implements CardJDBCRepository {
         log.info("Insertando una nueva tarjeta a la BD [{}]", card);
 
         var params = new MapSqlParameterSource();
-        params.addValue("cardnumber", card.getCardNumber());
-        params.addValue("descriptionstatus", card.getDescriptionStatus());
-        params.addValue("membership", card.getMembership());
-        params.addValue("balance", card.getBalance());
+        params.addValue(KEY_CARD_NUM, card.getCardNumber());
+        params.addValue(KEY_DESCRIPTION, card.getDescriptionStatus());
+        params.addValue(KEY_MEMBERSHIP, card.getMembership());
+        params.addValue(KEY_BALANCE, card.getBalance());
 
-        return dao.update(createCard, params);
+        return dao.insert(insertCard, params,null).intValue();
+
+
     }
 
 }

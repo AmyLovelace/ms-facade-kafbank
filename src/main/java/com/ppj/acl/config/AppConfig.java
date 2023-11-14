@@ -1,5 +1,6 @@
 package com.ppj.acl.config;
 
+import com.ppj.acl.adapter.rest.model.card.CardBuilder;
 import com.ppj.acl.config.interceptor.LogInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,4 +47,13 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
 
+  @Bean
+  public CardBuilder cardBuilder() {
+        return new CardBuilder();
+  }
 }
+
+
+
+
+

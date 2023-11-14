@@ -46,7 +46,7 @@ public class AccountJDBCAdapter implements AccountJDBCRepository {
     @Override
     public Account getUserByName(String name) {
         var parameter = new MapSqlParameterSource().addValue(KEY_ACCOUNT_N, name);
-            log.info("Se va a realziar la busqueda de la cuenta que tiene como usuario a: [{}]", name);
+            log.info("Se va a realizar la busqueda de la cuenta que tiene como usuario a: [{}]", name);
             var response =  dao.findOne(getAccount,parameter, AccountJDBCModel.class).orElseThrow(()-> new BadRequestRestClientException(ErrorCodeAccount.ACCOUNT_NOT_FOUND));
             return response.toDomain();
     }
