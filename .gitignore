@@ -42,3 +42,4 @@ out/
 
 ## Volume ##
 docker/postgres/volume
+.DS_Store
