@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Random;
+
 @Data
 //@JsonIgnoreProperties(ignoreUnknown = true)
 //@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
@@ -68,6 +70,28 @@ public class CardBuilder {
 
 
         return cardNumber.substring(0, 3) + "-" + cardNumber.substring(3, 6) + "-" + cardNumber.substring(6, 9) + "-" + cardNumber.substring(9);
+    }
+
+    public class GenerateCreditCardNumber {
+
+        public static String generate() {
+
+            Random random = new Random();
+            int number1 = random.nextInt(10000000);
+            int number2 = random.nextInt(10000000);
+            int number3 = random.nextInt(10000000);
+            int number4 = random.nextInt(10000000);
+
+            String number1String = Integer.toString(number1);
+            String number2String = Integer.toString(number2);
+            String number3String = Integer.toString(number3);
+            String number4String = Integer.toString(number4);
+
+
+            return String.format("%09d-%09d-%09d-%09d", number1String, number2String, number3String, number4String);
+        }
+
+
     }
 
 
